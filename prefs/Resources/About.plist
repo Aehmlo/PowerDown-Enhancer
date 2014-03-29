@@ -1,0 +1,35 @@
+{
+     title = About;
+     items = (
+          {
+               cell = PSGroupCell;
+               footerText = "© 2011–2014 Aehmlo Lxaitn";
+               footerAlignment = 1;
+          },
+          {
+               cellClass = ALPDHeaderCell;
+          },
+          {
+               cell = PSGroupCell;
+          },
+          {
+               cell = PSButtonCell;
+               action = hb_sendSupportEmail;
+               label = "Email Support";
+          },
+          {
+               cell = PSButtonCell;
+               action = hb_openDonate;
+               label = "Donate";
+          },
+          {
+               cell = PSGroupCell;
+          },
+          {
+               cell = PSLinkCell;
+               label = Credits;
+               detail = ALPDCreditsListController;
+               isController = true;
+          }
+     );
+}

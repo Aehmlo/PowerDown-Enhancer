@@ -1,0 +1,47 @@
+{
+     title = Credits;
+     items = (
+          {
+               cell = PSGroupCell;
+               label = Development;
+          },
+          {
+               cellClass = HBTwitterCell;
+               user = Aehmlo;
+               big = true;
+               label = "Aehmlo Lxaitn";
+          },
+          {
+               cell = PSGroupCell;
+               label = "Design/Icon";
+          },
+          {
+               cellClass = HBTwitterCell;
+               user = bFlatCreative;
+               big = true;
+               label = "Brett Schuster";
+          },
+          {
+               cell = PSGroupCell;
+               label = "Preference Bundle Framework";
+          },
+          {
+               cellClass = HBTwitterCell;
+               big = true;
+               user = thekirbylover;
+               label = "Adam D.";
+          },
+          {
+               cellClass = HBTwitterCell;
+               big = true;
+               user = insanj;
+               label = "Julian Weiss";
+          },
+          {
+               cellClass = HBTwitterCell;
+               user = Aehmlo;
+               big = true;
+               label = "Aehmlo Lxaitn";
+          }
+     );
+}

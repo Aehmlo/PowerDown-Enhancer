@@ -1,0 +1,113 @@
+{
+	title = "PowerDown Enhancer";
+	items =
+		(
+			{
+				cell =  PSGroupCell;
+				label = General;
+			},
+			{
+				defaults = com.aehmlo.powerdownenhancer;
+				cell = PSSwitchCell;
+				key = Enable;
+				id = EnableSwitch;
+				label = Enable;
+				alternateColors = true;
+				default = true;
+			},
+			{
+				cell = PSLinkListCell;
+				id = FunctionList;
+				default = 1;
+				defaults = com.aehmlo.powerdownenhancer;
+				key = Function;
+				detail = PSListItemsController;
+				label = Action;
+				validTitles = (
+					"Respring",
+					"Safe Mode",
+					"Power Down",
+					"Reboot",
+					"Do Nothing"
+				);
+				validValues = (
+					1,
+					2,
+					3,
+					4,
+					5
+				);
+			},
+			{
+				cell = PSGroupCell;
+				label = Appearance;
+				id = Appearance;
+			},
+			{
+				cell = PSSwitchCell;
+				label = "Change Text";
+				key = ChangeText;
+				id = ChangeText;
+				default = true;
+				defaults = com.aehmlo.powerdownenhancer;
+			},
+			{
+				cell = PSSwitchCell;
+				label = "Use Custom Text";
+				key = CustomText;
+				id = CustomText;
+				default = false;
+				defaults = com.aehmlo.powerdownenhancer;
+			},
+			{
+				cell = PSEditTextCell;
+				defaults = com.aehmlo.powerdownenhancer;
+				key = Text;
+				id = Text;
+				placeholder = "Custom Text";
+			},
+			{
+				cell = PSGroupCell;
+				label = Password;
+				id = Passcode;
+			},
+			{
+				cell = PSSwitchCell;
+				label = "Use Password";
+				id = PasscodeSwitch;
+				key = EnablePasscode;
+				default = false;
+				defaults = com.aehmlo.powerdownenhancer;
+			},
+			{
+				cell = PSSecureEditTextCell;
+				label = Password;
+				id = PasscodeField;
+				key = Passcode;
+				defaults = com.aehmlo.powerdownenhancer;
+			},
+			{
+				cell = PSGroupCell;
+				label = "Not Recommended";
+				id = NotRecommended;
+			},
+			{
+				cell = PSSwitchCell;
+				label = "Disable Lock Button";
+				key = DisableLockButton;
+				default = false;
+				defaults = com.aehmlo.powerdownenhancer;
+				alernateColors = true;
+				id = DisableLockButton;
+			},
+			{
+				cell = PSGroupCell;
+			},
+			{
+				detail = ALPDAboutListController;
+				cell = PSLinkCell;
+				isController = true;
+				label = About;
+			}
+		);
+}

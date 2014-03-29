@@ -4,5 +4,6 @@
 
 - (void)orderFront;
 - (void)orderOutWithCompletion:(id)arg1;
+- (void)orderOut;
 
 @end

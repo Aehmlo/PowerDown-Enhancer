@@ -20,12 +20,12 @@ extern "C" {
 }
 static NSDictionary *prefs;
 
-static CFStringRef (*orig_CFBundleCopyLocalizedString)(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName);
+static CFStringRef (*ALPD_origCFBundleCopyLocalizedString)(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName);
 
-static CFStringRef ALPD_newCFBundleCopyLocalizedString(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName){
+CFStringRef ALPD_newCFBundleCopyLocalizedString(CFBundleRef bundle, CFStringRef key, CFStringRef value, CFStringRef tableName){
 	CFStringRef ret;
-	if(CFStringCompare(key, CFSTR("POWER_DOWN_LOCK_LABEL"), 0) == 0){
-		if((!prefs[@"Enable"] || [prefs[@"Enable"] boolValue]) && (!prefs[@"ChangeText"] || [prefs[@"ChangeText"] boolValue])){
+	if(key && CFStringCompare(key, CFSTR("POWER_DOWN_LOCK_LABEL"), 0) == 0){
+		if(prefs && (prefs[@"Enable"]==nil || [prefs[@"Enable"] boolValue]) && (prefs[@"ChangeText"]==nil || [prefs[@"ChangeText"] boolValue])){
 			if([prefs[@"CustomText"] boolValue]){
 				return CFStringCreateWithCString(NULL, [(NSString *)prefs[@"Text"] UTF8String], kCFStringEncodingUTF8); //Long live Unicode! Well, sorta.
 			}
@@ -44,17 +44,21 @@ static CFStringRef ALPD_newCFBundleCopyLocalizedString(CFBundleRef bundle, CFStr
 					break;
 			}
 		}else{
-			ret = orig_CFBundleCopyLocalizedString(bundle, key, value, tableName);
+			ret = ALPD_origCFBundleCopyLocalizedString(bundle, key, value, tableName);
 		}
 		return ret;
 	}else{
-		return orig_CFBundleCopyLocalizedString(bundle, key, value, tableName);
+		return ALPD_origCFBundleCopyLocalizedString(bundle, key, value, tableName);
 	}
 }
 
 %hook SBPowerDownController
 
 - (void)powerDown{
+	if(prefs[@"Enable"]!=nil && ![prefs[@"Enable"] boolValue]){
+		%orig();
+		return;
+	}
 	switch([prefs[@"Function"] intValue]){
 		case 1:
 			[(SpringBoard *)[%c(SpringBoard) sharedApplication] _relaunchSpringBoardNow];
@@ -66,6 +70,10 @@ static CFStringRef ALPD_newCFBundleCopyLocalizedString(CFBundleRef bundle, CFStr
 			[(SpringBoard *)[%c(SpringBoard) sharedApplication] _rebootNow];
 			break;
 		case 5:
+			if([self respondsToSelector:@selector(orderOut)])
+				[self orderOut];
+			else if([self respondsToSelector:@selector(orderOutWithCompletion:)])
+				[self orderOutWithCompletion:nil];
 			break;
 		default:
 			%orig();
@@ -90,7 +98,7 @@ static CFStringRef ALPD_newCFBundleCopyLocalizedString(CFBundleRef bundle, CFStr
 
 - (void)orderFront{
 	reloadPrefs();
-	if(![ALPDAlertDelegate sharedInstance].authenticated && [prefs[@"EnablePasscode"] boolValue] && ![prefs[@"Passcode"] isEqualToString:@""]){
+	if(![ALPDAlertDelegate sharedInstance].authenticated && (prefs[@"Enable"]==nil || [prefs[@"Enable"] boolValue]) && [prefs[@"EnablePasscode"] boolValue] && ![prefs[@"Passcode"] isEqualToString:@""]){
 		UIAlertView *passwordAlert = [[UIAlertView alloc] initWithTitle:@"Enter Password" message:nil delegate:[ALPDAlertDelegate sharedInstance] cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
 		if([UIAlertView instancesRespondToSelector:@selector(setAlertViewStyle:)]) passwordAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
 		else [passwordAlert addTextFieldWithValue:@"" label:@"Password"];
@@ -104,24 +112,57 @@ static CFStringRef ALPD_newCFBundleCopyLocalizedString(CFBundleRef bundle, CFStr
 			passwordField.keyboardType = UIKeyboardTypeDefault;
 		}
 		passwordField.placeholder = @"Password";
+		passwordField.secureTextEntry = YES;
 		passwordField.keyboardAppearance = UIKeyboardAppearanceAlert;
 		passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
 		passwordField.delegate = [ALPDAlertDelegate sharedInstance];
 		passwordAlert.tag = 6901;
 		[passwordAlert show];
 		[passwordAlert release];
-	}else if([prefs[@"Function"] intValue] != 5){
+	}else{
 		%orig();
 	}
 }
 
 %end
 
+%hook SpringBoard
+
+- (void)lockButtonUp:(id)arg1{
+	if((prefs[@"Enable"]!=nil && ![prefs[@"Enable"] boolValue]) || ![prefs[@"DisableLockButton"] boolValue]){
+		%orig(arg1);
+	}
+}
+
+- (void)_lockButtonUpFromSource:(int)arg1{
+	if((prefs[@"Enable"]!=nil && ![prefs[@"Enable"] boolValue]) || ![prefs[@"DisableLockButton"] boolValue]){
+		%orig(arg1);
+	}
+}
+
+- (void)lockButtonDown:(id)arg1{
+	reloadPrefs();
+	if((prefs[@"Enable"]!=nil && ![prefs[@"Enable"] boolValue]) || ![prefs[@"DisableLockButton"] boolValue]){
+		%orig(arg1);
+	}
+}
+
+- (void)_lockButtonDownFromSource:(int)arg1{
+	reloadPrefs();
+	if((prefs[@"Enable"]!=nil && ![prefs[@"Enable"] boolValue]) || ![prefs[@"DisableLockButton"] boolValue]){
+		%orig(arg1);
+	}
+}
+
+%end
+
 static void reloadPrefs(void){
-	prefs = [NSDictionary dictionaryWithContentsOfFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Preferences/com.aehmlo.powerdownenhancer.plist"]];
+	[prefs release];
+	prefs = [[NSDictionary alloc] initWithContentsOfFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Preferences/com.aehmlo.powerdownenhancer.plist"]];
 }
 
 %ctor{
+	prefs = [[NSDictionary alloc] init];
 	reloadPrefs();
-	MSHookFunction(CFBundleCopyLocalizedString, ALPD_newCFBundleCopyLocalizedString, &orig_CFBundleCopyLocalizedString);
+	MSHookFunction(CFBundleCopyLocalizedString, ALPD_newCFBundleCopyLocalizedString, &ALPD_origCFBundleCopyLocalizedString);
 }
