@@ -17,16 +17,7 @@
 
 @implementation ALPDRootListController
 
-- (instancetype)init{
-	if((self = [super init])) {
-		_specifiers = [[self loadSpecifiersFromPlistName:@"Index" target:self] retain];
-		self.removedSpecifiers = [[NSMutableDictionary alloc] initWithCapacity:1];
-	}
-	return self;
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
+- (void)hideRelevantSpecifiers{
 	if(![[self ALGetValueForSpecifierID:@"PasscodeSwitch"] boolValue]){
 		[self ALHideSpecifier:@"PasscodeField" animated:NO];
 	}
@@ -51,6 +42,36 @@
 	}
 }
 
+- (void)loadSpecifiers{
+	if(_specifiers) return;
+	_specifiers = [[self loadSpecifiersFromPlistName:@"Index" target:self] retain];
+}
+
+- (instancetype)init{
+	if((self = [super init])) {
+		[self loadSpecifiers];
+		self.removedSpecifiers = [[NSMutableDictionary alloc] initWithCapacity:1];
+	}
+	return self;
+}
+
+
+- (id)specifiers{
+	[self loadSpecifiers];
+	[self hideRelevantSpecifiers];
+	return _specifiers;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	[self hideRelevantSpecifiers];
+}
+
+- (void)willBecomeActive{
+	[super willBecomeActive];
+	[self hideRelevantSpecifiers];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	[textField resignFirstResponder];
 	if([textField respondsToSelector:@selector(cell)] && [[textField cell] respondsToSelector:@selector(resignFirstResponder)]){
@@ -60,7 +81,7 @@
 }
 
 - (void)ALHideSpecifier:(NSString *)specifier animated:(BOOL)animated{
-	if(self.removedSpecifiers[specifier]) return;
+	if(self.removedSpecifiers[specifier] || ![self specifierForID:specifier]) return;
 	self.removedSpecifiers[specifier] = [self specifierForID:specifier];
 	[self removeSpecifierID:specifier animated:animated];
 }
@@ -72,16 +93,20 @@
 }
 
 - (id)ALGetValueForSpecifierID:(NSString *)specifier{
-	return [self readPreferenceValue:[self specifierForID:specifier]?:self.removedSpecifiers[specifier]];
+	return [self readPreferenceValue:[self specifierForID:specifier] ?: self.removedSpecifiers[specifier]];
+}
+
+- (BOOL)canBeShownFromSuspendedState{
+	return NO; //Temporary, odd bugs.
 }
 
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier{
 	[super setPreferenceValue:value specifier:specifier];
 	if([[specifier identifier] isEqualToString:@"PasscodeSwitch"]){
-		if(![value boolValue]){
-			[self ALHideSpecifier:@"PasscodeField" animated:YES];
-		}else{
+		if([value boolValue]){
 			[self ALShowSpecifier:@"PasscodeField" afterSpecifier:@"PasscodeSwitch" animated:YES];
+		}else{
+			[self ALHideSpecifier:@"PasscodeField" animated:YES];
 		}
 	}else if([[specifier identifier] isEqualToString:@"ChangeText"]){
 		if([value boolValue]){
