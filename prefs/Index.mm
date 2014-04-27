@@ -97,7 +97,7 @@
 }
 
 - (BOOL)canBeShownFromSuspendedState{
-	return NO; //Temporary, odd bugs.
+	return NO; //Temporary, odd bugs. Couldn't get the specifiers to hide when the Settings app was launched after exiting.
 }
 
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier{
@@ -180,5 +180,3 @@
 }
 
 @end
-
-// vim:ft=objc

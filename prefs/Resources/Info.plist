@@ -7,11 +7,11 @@
 	<key>CFBundleExecutable</key>
 	<string>PowerDownEnhancerPrefs</string>
 	<key>HBPackageIdentifier</key>
-	<string>com.aehmlo.powerdownenhancer</string>
+	<string>com.aehmlo.powerdownenhancer2</string>
 	<key>CFBundleName</key>
 	<string>PowerDown Enhancer</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.aehmlo.powerdownenhancerprefs</string>
+	<string>com.aehmlo.powerdownenhancer2prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

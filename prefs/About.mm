@@ -12,15 +12,15 @@
 }
 
 + (NSURL *)hb_websiteURL{
-	return [NSURL URLWithString:@"http://aehmlo.com"];
+	return [NSURL URLWithString:@"http://aehmlo.me"];
 }
 
 + (NSURL *)hb_donateURL{
-	return [NSURL URLWithString:@"http://aehmlo.com/donate"];
+	return [NSURL URLWithString:@"http://aehmlo.me/donate"];
 }
 
 + (NSString *)hb_supportEmailAddress{
-	return @"bFlat Design Studios <bflatstudios+powerdownenhancer@gmail.com>";
+	return @"Aehmlo Lxaitn <bflatstudios+powerdownenhancer@gmail.com>";
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(PSTableCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

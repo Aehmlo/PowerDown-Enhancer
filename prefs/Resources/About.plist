@@ -30,6 +30,10 @@
                label = Credits;
                detail = ALPDCreditsListController;
                isController = true;
-          }
+          },
+          	{
+				cell = PSGroupCell;
+				footerText = "The misfits. The rebels. The troublemakers.";
+			}
      );
 }
