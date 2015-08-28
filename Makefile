@@ -5,7 +5,7 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = PowerDownEnhancer
 PowerDownEnhancer_FILES = PowerDownEnhancer.xm
 PowerDownEnhancer_FRAMEWORKS = UIKit
-PowerDownEnhancer_LIBRARIES = hbangprefs
+PowerDownEnhancer_LIBRARIES = cephei
 
 include $(THEOS)/makefiles/tweak.mk
 
