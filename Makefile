@@ -11,7 +11,6 @@ include $(THEOS)/makefiles/tweak.mk
 
 after-install::
 	install.exec "killall -9 backboardd"
-	rm *.deb
 
 SUBPROJECTS += prefs
 include $(THEOS_MAKE_PATH)/aggregate.mk
