@@ -3,7 +3,7 @@ export ARCHS=armv7 arm64
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = PowerDownEnhancer
-PowerDownEnhancer_FILES = $(wildcard *.xm)
+PowerDownEnhancer_FILES = PowerDownEnhancer.xm
 PowerDownEnhancer_FRAMEWORKS = UIKit
 PowerDownEnhancer_LIBRARIES = hbangprefs
 
