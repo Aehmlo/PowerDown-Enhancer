@@ -39,7 +39,7 @@ static NSInteger function;
 
 %ctor {
 
-	HBPreferences *prefs = [HBPreferences preferencesForIdentifier:@"com.aehmlo.powerdownenhancer2"];
+	HBPreferences *prefs = [HBPreferences preferencesForIdentifier:@"com.aehmlo.powerdownenhancer"];
 
 	[prefs registerInteger:&function default:1 forKey:@"Function"];
 	[prefs registerBool:&enabled default:YES forKey:@"Enabled"];
