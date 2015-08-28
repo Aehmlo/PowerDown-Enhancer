@@ -1,5 +1,4 @@
 #import <hbangprefs/HBAboutListController.h>
-#import "ALPDHeaderCell.h"
 
 @interface ALPDAboutListController: HBAboutListController
 
