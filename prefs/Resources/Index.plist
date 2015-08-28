@@ -1,113 +1,185 @@
-{
-	title = "PowerDown Enhancer";
-	items =
-		(
-			{
-				cell =  PSGroupCell;
-				label = General;
-			},
-			{
-				defaults = com.aehmlo.powerdownenhancer;
-				cell = PSSwitchCell;
-				key = Enable;
-				id = EnableSwitch;
-				label = Enable;
-				alternateColors = true;
-				default = true;
-			},
-			{
-				cell = PSLinkListCell;
-				id = FunctionList;
-				default = 1;
-				defaults = com.aehmlo.powerdownenhancer;
-				key = Function;
-				detail = PSListItemsController;
-				label = Action;
-				validTitles = (
-					"Respring",
-					"Safe Mode",
-					"Power Down",
-					"Reboot",
-					"Do Nothing"
-				);
-				validValues = (
-					1,
-					2,
-					3,
-					4,
-					5
-				);
-			},
-			{
-				cell = PSGroupCell;
-				label = Appearance;
-				id = Appearance;
-			},
-			{
-				cell = PSSwitchCell;
-				label = "Change Text";
-				key = ChangeText;
-				id = ChangeText;
-				default = true;
-				defaults = com.aehmlo.powerdownenhancer;
-			},
-			{
-				cell = PSSwitchCell;
-				label = "Use Custom Text";
-				key = CustomText;
-				id = CustomText;
-				default = false;
-				defaults = com.aehmlo.powerdownenhancer;
-			},
-			{
-				cell = PSEditTextCell;
-				defaults = com.aehmlo.powerdownenhancer;
-				key = Text;
-				id = Text;
-				placeholder = "Custom Text";
-			},
-			{
-				cell = PSGroupCell;
-				label = Password;
-				id = Passcode;
-			},
-			{
-				cell = PSSwitchCell;
-				label = "Use Password";
-				id = PasscodeSwitch;
-				key = EnablePasscode;
-				default = false;
-				defaults = com.aehmlo.powerdownenhancer;
-			},
-			{
-				cell = PSSecureEditTextCell;
-				label = Password;
-				id = PasscodeField;
-				key = Passcode;
-				defaults = com.aehmlo.powerdownenhancer;
-			},
-			{
-				cell = PSGroupCell;
-				label = "Not Recommended";
-				id = NotRecommended;
-			},
-			{
-				cell = PSSwitchCell;
-				label = "Disable Lock Button";
-				key = DisableLockButton;
-				default = false;
-				defaults = com.aehmlo.powerdownenhancer;
-				alernateColors = true;
-				id = DisableLockButton;
-			},
-			{
-				cell = PSGroupCell;
-			},
-			{
-				detail = ALPDAboutListController;
-				cell = PSLinkCell;
-				isController = true;
-				label = About;
-			}
-		);
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>General</string>
+		</dict>
+		<dict>
+			<key>alternateColors</key>
+			<string>true</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>true</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>EnableSwitch</string>
+			<key>key</key>
+			<string>Enable</string>
+			<key>label</key>
+			<string>Enable</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>id</key>
+			<string>FunctionList</string>
+			<key>key</key>
+			<string>Function</string>
+			<key>label</key>
+			<string>Action</string>
+			<key>validTitles</key>
+			<array>
+				<string>Respring</string>
+				<string>Safe Mode</string>
+				<string>Power Down</string>
+				<string>Reboot</string>
+				<string>Do Nothing</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>id</key>
+			<string>Appearance</string>
+			<key>label</key>
+			<string>Appearance</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>true</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>ChangeText</string>
+			<key>key</key>
+			<string>ChangeText</string>
+			<key>label</key>
+			<string>Change Text</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>false</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>CustomText</string>
+			<key>key</key>
+			<string>CustomText</string>
+			<key>label</key>
+			<string>Use Custom Text</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>Text</string>
+			<key>key</key>
+			<string>Text</string>
+			<key>placeholder</key>
+			<string>Custom Text</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>id</key>
+			<string>Passcode</string>
+			<key>label</key>
+			<string>Password</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>false</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>PasscodeSwitch</string>
+			<key>key</key>
+			<string>EnablePasscode</string>
+			<key>label</key>
+			<string>Use Password</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSecureEditTextCell</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>PasscodeField</string>
+			<key>key</key>
+			<string>Passcode</string>
+			<key>label</key>
+			<string>Password</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>id</key>
+			<string>NotRecommended</string>
+			<key>label</key>
+			<string>Not Recommended</string>
+		</dict>
+		<dict>
+			<key>alernateColors</key>
+			<string>true</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>false</string>
+			<key>defaults</key>
+			<string>com.aehmlo.powerdownenhancer</string>
+			<key>id</key>
+			<string>DisableLockButton</string>
+			<key>key</key>
+			<string>DisableLockButton</string>
+			<key>label</key>
+			<string>Disable Lock Button</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>ALPDAboutListController</string>
+			<key>isController</key>
+			<string>true</string>
+			<key>label</key>
+			<string>About</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>PowerDown Enhancer</string>
+</dict>
+</plist>
