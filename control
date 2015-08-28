@@ -1,8 +1,8 @@
 Package: com.aehmlo.powerdownenhancer2
 Replaces: com.aehmlo.powerdownenhancer
-Name: PowerDown Enhancer 2
+Name: PowerDown Enhancer
 Depends: mobilesubstrate, ws.hbang.common, preferenceloader, firmware (>=5.0)
-Version: 2.0
+Version: 2.1
 Architecture: iphoneos-arm
 Description: An awesome MobileSubstrate tweak!
 Maintainer: Aehmlo Lxaitn
