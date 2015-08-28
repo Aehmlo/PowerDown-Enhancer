@@ -3,11 +3,10 @@
      items = (
           {
                cell = PSGroupCell;
-               footerText = "© 2011–2014 Aehmlo Lxaitn";
-               footerAlignment = 1;
-          },
-          {
-               cellClass = ALPDHeaderCell;
+               condensed = true;
+               headerCellClass = HBPackageNameHeaderCell;
+               icon = PowerDownEnhancerPrefs.png;
+               packageIdentifier = com.aehmlo.powerdownenhancer2;
           },
           {
                cell = PSGroupCell;
