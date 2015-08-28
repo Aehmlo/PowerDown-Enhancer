@@ -1,4 +1,4 @@
-#import <hbangprefs/HBRootListController.h>
+#import <CepheiPrefs/HBRootListController.h>
 #import <Preferences/PSSpecifier.h>
 
 #define PrettyLog(fmt, ...) NSLog(@"\e[1;31m%@\e]m ", [NSString stringWithFormat:fmt, ## __VA_ARGS__])

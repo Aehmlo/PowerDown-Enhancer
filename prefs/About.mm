@@ -1,4 +1,4 @@
-#import <hbangprefs/HBAboutListController.h>
+#import <CepheiPrefs/HBAboutListController.h>
 
 @interface ALPDAboutListController: HBAboutListController
 

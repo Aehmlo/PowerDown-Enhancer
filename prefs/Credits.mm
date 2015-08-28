@@ -1,4 +1,4 @@
-#import <hbangprefs/HBListController.h>
+#import <CepheiPrefs/HBListController.h>
 
 @interface ALPDCreditsListController: HBListController
 
