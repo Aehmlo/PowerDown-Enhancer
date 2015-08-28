@@ -3,6 +3,15 @@
 
 #define PrettyLog(fmt, ...) NSLog(@"\e[1;31m%@\e]m ", [NSString stringWithFormat:fmt, ## __VA_ARGS__])
 
+@interface HBRootListController ()
+
+- (void)willBecomeActive;
+
+-(void)removeSpecifierID:(NSString *)id animated:(BOOL)animated;
+-(void)insertSpecifier:(PSSpecifier *)specifier afterSpecifierID:(NSString *)id animated:(BOOL)animated;
+
+@end
+
 @interface UITextField (ALPDPrefs)
 
 - (id)cell;

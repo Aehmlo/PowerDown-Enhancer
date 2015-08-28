@@ -1,4 +1,12 @@
 #import <CepheiPrefs/HBAboutListController.h>
+#import <Preferences/PSTableCell.h>
+
+@interface PSTableCell ()
+
+@property BOOL _drawsSeparatorAtBottomOfSection;
+@property BOOL _drawsSeparatorAtTopOfSection;
+
+@end
 
 @interface ALPDAboutListController: HBAboutListController
 
