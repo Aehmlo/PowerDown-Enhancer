@@ -38,5 +38,3 @@
 }
 
 @end
-
-// vim:ft=objc
