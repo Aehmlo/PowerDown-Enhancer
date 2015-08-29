@@ -30,11 +30,4 @@
 	return @"Aehmlo Lxaitn <powerdownenhancer@aehmlo.com>";
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(PSTableCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0 && indexPath.row == 0 && [cell respondsToSelector:@selector(_setDrawsSeparatorAtTopOfSection:)]) {
-		cell._drawsSeparatorAtTopOfSection = NO;
-		cell._drawsSeparatorAtBottomOfSection = NO;
-	}
-}
-
 @end
